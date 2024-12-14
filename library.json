@@ -1,0 +1,30 @@
+{
+  "name": "arduino-gea2",
+  "keywords": "GEA2, GE Appliances",
+  "description": "Interact with GE Appliances by using GEA2 packets and ERDs.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geappliances/arduino-gea2.git"
+  },
+  "authors": [
+    {
+      "name": "GE Appliances Embedded",
+      "email": "embedded-open-source@geappliances.com",
+      "maintainer": true
+    }
+  ],
+  "version": "0.1.1",
+  "frameworks": "Arduino",
+  "platforms": "*",
+  "export": {
+    "include": [
+      "examples/*",
+      "include/*",
+      "src/*"
+    ]
+  },
+  "dependencies": {
+    "geappliances/tiny-gea-api": "^2.0.1",
+    "ryanplusplus/arduino-tiny": "^5.0.0"
+  }
+}
