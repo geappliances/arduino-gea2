@@ -53,15 +53,13 @@ void GEA2::begin(Stream& uart, uint8_t clientAddress, uint32_t requestTimeout, u
   tiny_gea2_interface_init(
     &gea2Interface,
     &streamUart.interface,
-    &timerGroup,
+    timeSource,
     &fakeMsecInterrupt.interface,
     clientAddress,
-    sendBuffer,
-    sizeof(sendBuffer),
-    receiveBuffer,
-    sizeof(receiveBuffer),
     sendQueueBuffer,
     sizeof(sendQueueBuffer),
+    receiveBuffer,
+    sizeof(receiveBuffer),
     false,
     2);
 

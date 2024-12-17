@@ -337,9 +337,8 @@ class GEA2 {
   tiny_timer_t fakeMsecTimer;
 
   tiny_gea2_interface_t gea2Interface;
-  uint8_t sendBuffer[255];
+  uint8_t sendQueueBuffer[500];
   uint8_t receiveBuffer[255];
-  uint8_t sendQueueBuffer[1000];
 
   tiny_gea2_erd_client_t erdClient;
   tiny_gea2_erd_client_configuration_t clientConfiguration;
