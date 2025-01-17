@@ -23,7 +23,7 @@ void setup()
 
   auto result = gea2.readERD<GEA2::U32>(0x0035);
   if(result.status == GEA2::ReadStatus::success) {
-    Serial.printf("Successfully read ERD 0x0035: 0x%08X\n", value.read());
+    Serial.printf("Successfully read ERD 0x0035: 0x%08X\n", result.value.read());
   }
   else {
     Serial.printf("Failed to read ERD 0x0035\n");
