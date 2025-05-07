@@ -13,7 +13,7 @@
       "maintainer": true
     }
   ],
-  "version": "0.1.5",
+  "version": "0.1.6",
   "frameworks": "Arduino",
   "platforms": "*",
   "export": {
@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "geappliances/tiny-gea-api": "^3.0.0",
+    "geappliances/tiny-gea-api": "^3.0.4",
     "ryanplusplus/arduino-tiny": "^5.0.0"
   }
 }
