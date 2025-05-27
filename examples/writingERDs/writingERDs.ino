@@ -12,7 +12,7 @@ void setup()
   gea2.begin(Serial1);
 
   gea2.writeERDAsync(
-    0x0035, GEA2::U32(0x01ABCDEF), +[](GEA2::WriteStatus status) {
+    GEA2::broadcastAddress, 0x0035, GEA2::U32(0x01ABCDEF), +[](GEA2::WriteStatus status) {
       if(status == GEA2::WriteStatus::success) {
         Serial.println("Wrote ERD 0x0035 asynchronously");
       }
@@ -21,7 +21,7 @@ void setup()
       }
     });
 
-  if(gea2.writeERD(0x0035, GEA2::U32(0x01ABCDEF)) == GEA2::WriteStatus::success) {
+  if(gea2.writeERD(GEA2::broadcastAddress, 0x0035, GEA2::U32(0x01ABCDEF)) == GEA2::WriteStatus::success) {
     Serial.println("Wrote ERD 0x0035");
   }
   else {

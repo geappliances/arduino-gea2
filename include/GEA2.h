@@ -91,7 +91,7 @@ class GEA2 {
   };
 
   static constexpr unsigned long baud = 19200;
-  static constexpr uint8_t defaultAddress = 0xC0;
+  static constexpr uint8_t broadcastAddress = 0xFF;
 
   template <typename T>
   class IntegerWrapper {
@@ -212,12 +212,6 @@ class GEA2 {
   PacketListener onPacketReceived(void (*callback)(const GEA2::Packet& packet));
 
   template <typename T>
-  void readERDAsync(uint16_t erd, void (*callback)(ReadStatus status, T value))
-  {
-    readERDAsync(defaultAddress, erd, callback);
-  }
-
-  template <typename T>
   void readERDAsync(uint8_t address, uint16_t erd, void (*callback)(ReadStatus status, T value))
   {
     readERDAsync(
@@ -226,12 +220,6 @@ class GEA2 {
         memcpy(&value, value_, std::min(static_cast<size_t>(valueSize), sizeof(T)));
         reinterpret_cast<void (*)(ReadStatus, T)>(context)(status, value);
       });
-  }
-
-  template <typename T, typename Context>
-  void readERDAsync(uint16_t erd, Context* context, void (*callback)(Context* context, ReadStatus status, T value))
-  {
-    readERDAsync(defaultAddress, erd, context, callback);
   }
 
   template <typename T, typename Context>
@@ -257,12 +245,6 @@ class GEA2 {
   void readERDAsync(uint8_t address, uint16_t erd, void* context, void (*callback)(void* context, ReadStatus status, const void* value, uint8_t valueSize));
 
   template <typename T>
-  ReadResult<T> readERD(uint16_t erd)
-  {
-    return readERD<T>(defaultAddress, erd);
-  }
-
-  template <typename T>
   ReadResult<T> readERD(uint8_t address, uint16_t erd)
   {
     struct Context {
@@ -286,12 +268,6 @@ class GEA2 {
   }
 
   template <typename T>
-  void writeERDAsync(uint16_t erd, T value, void (*callback)(WriteStatus status))
-  {
-    writeERDAsync(defaultAddress, erd, value, callback);
-  }
-
-  template <typename T>
   void writeERDAsync(uint8_t address, uint16_t erd, T value, void (*callback)(WriteStatus status))
   {
     writeERDAsync(
@@ -301,24 +277,12 @@ class GEA2 {
   }
 
   template <typename T, typename Context>
-  void writeERDAsync(uint16_t erd, T value, Context* context, void (*callback)(Context* context, WriteStatus status))
-  {
-    writeERDAsync(defaultAddress, erd, value, context, callback);
-  }
-
-  template <typename T, typename Context>
   void writeERDAsync(uint8_t address, uint16_t erd, T value, Context* context, void (*callback)(Context* context, WriteStatus status))
   {
     writeERDAsync(address, erd, &value, sizeof(value), reinterpret_cast<void*>(context), reinterpret_cast<void (*)(void*, WriteStatus)>(callback));
   }
 
   void writeERDAsync(uint8_t address, uint16_t erd, const void* value, size_t valueSize, void* context, void (*callback)(void* context, WriteStatus status));
-
-  template <typename T>
-  WriteStatus writeERD(uint16_t erd, T value)
-  {
-    return writeERD(defaultAddress, erd, value);
-  }
 
   template <typename T>
   WriteStatus writeERD(uint8_t address, uint16_t erd, T value)

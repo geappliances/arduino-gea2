@@ -14,7 +14,7 @@ void setup()
   struct ModelNumber {
     char contents[32];
   };
-  auto model_number = gea2.readERD<ModelNumber>(0x0001);
+  auto model_number = gea2.readERD<ModelNumber>(GEA2::broadcastAddress, 0x0001);
   if(model_number.status == GEA2::ReadStatus::success) {
     Serial.printf("Model Number: %.32s\n", model_number.value.contents);
   }
@@ -25,7 +25,7 @@ void setup()
   struct SerialNumber {
     char contents[32];
   };
-  auto serial_number = gea2.readERD<SerialNumber>(0x0002);
+  auto serial_number = gea2.readERD<SerialNumber>(GEA2::broadcastAddress, 0x0002);
   if(serial_number.status == GEA2::ReadStatus::success) {
     Serial.printf("Serial Number: %.32s\n", serial_number.value);
   }
@@ -33,7 +33,7 @@ void setup()
     Serial.printf("Failed to read Serial Number\n");
   }
 
-  auto appliance_type = gea2.readERD<GEA2::U8>(0x0008);
+  auto appliance_type = gea2.readERD<GEA2::U8>(GEA2::broadcastAddress, 0x0008);
   if(appliance_type.status == GEA2::ReadStatus::success) {
     Serial.printf("Appliance Type: %d\n", appliance_type.value.read());
   }
@@ -41,7 +41,7 @@ void setup()
     Serial.printf("Failed to read Appliance Type\n");
   }
 
-  auto personality = gea2.readERD<GEA2::U32>(0x0035);
+  auto personality = gea2.readERD<GEA2::U32>(GEA2::broadcastAddress, 0x0035);
   if(personality.status == GEA2::ReadStatus::success) {
     Serial.printf("Personality: %d\n", personality.value.read());
   }

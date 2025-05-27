@@ -11,7 +11,7 @@ void setup()
 
   gea2.begin(Serial1);
 
-  gea2.sendPacket(GEA2::Packet(0xE4, 0xFF, { 0x01 }));
+  gea2.sendPacket(GEA2::Packet(0xE4, GEA2::broadcastAddress, { 0x01 }));
 
   gea2.onPacketReceived(+[](const GEA2::Packet& packet) {
     Serial.printf("Packet received from 0x%02X\n", packet.source());
